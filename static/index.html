@@ -6,723 +6,578 @@
     <title>OpenChem - Deal Tracker</title>
     <style>
         :root {
-            --bg: #0a0e17;
-            --surface: #111827;
-            --surface2: #1a2235;
-            --border: #2a3450;
-            --text: #e2e8f0;
-            --text-dim: #94a3b8;
-            --green: #22c55e;
-            --red: #ef4444;
-            --blue: #3b82f6;
-            --amber: #f59e0b;
-            --purple: #8b5cf6;
+            --bg: #0a0e17; --surface: #111827; --surface2: #1a2235; --border: #2a3450;
+            --text: #e2e8f0; --text-dim: #94a3b8;
+            --green: #22c55e; --red: #ef4444; --blue: #3b82f6; --amber: #f59e0b; --purple: #8b5cf6;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.5;
-        }
-
-        /* ── Header ── */
-        header {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        header h1 { font-size: 20px; font-weight: 700; }
-        header h1 span { color: var(--blue); }
-        .header-right { display: flex; gap: 12px; align-items: center; }
-        .firm-capital { color: var(--text-dim); font-size: 13px; }
-
-        /* ── Tabs ── */
-        .tabs {
-            display: flex;
-            gap: 0;
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 0 32px;
-        }
-        .tab {
-            padding: 12px 24px;
-            cursor: pointer;
-            font-size: 14px;
-            color: var(--text-dim);
-            border-bottom: 2px solid transparent;
-            transition: all 0.15s;
-        }
-        .tab:hover { color: var(--text); }
-        .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
-
-        /* ── Main ── */
-        main { padding: 24px 32px; max-width: 1600px; margin: 0 auto; }
-
-        /* ── KPI Cards ── */
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-        .kpi-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 16px 20px;
-        }
-        .kpi-label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
-        .kpi-value { font-size: 28px; font-weight: 700; margin-top: 4px; }
-        .kpi-value.green { color: var(--green); }
-        .kpi-value.red { color: var(--red); }
-        .kpi-value.blue { color: var(--blue); }
-        .kpi-value.amber { color: var(--amber); }
-
-        /* ── Buttons ── */
-        .btn {
-            padding: 8px 16px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
-            transition: all 0.15s;
-        }
-        .btn-primary { background: var(--blue); color: white; }
-        .btn-primary:hover { background: #2563eb; }
-        .btn-danger { background: var(--red); color: white; }
-        .btn-danger:hover { background: #dc2626; }
-        .btn-sm { padding: 4px 10px; font-size: 12px; }
-
-        /* ── Table ── */
-        .table-wrap {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow-x: auto;
-        }
-        table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        th {
-            text-align: left;
-            padding: 12px 14px;
-            background: var(--surface2);
-            color: var(--text-dim);
-            font-weight: 600;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }
-        td {
-            padding: 10px 14px;
-            border-top: 1px solid var(--border);
-            white-space: nowrap;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+        header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 28px; display: flex; justify-content: space-between; align-items: center; }
+        header h1 { font-size: 18px; font-weight: 700; } header h1 span { color: var(--blue); }
+        .header-right { display: flex; gap: 12px; align-items: center; font-size: 13px; }
+        .header-right .user-info { color: var(--text-dim); }
+        .tabs { display: flex; gap: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 28px; overflow-x: auto; }
+        .tab { padding: 11px 20px; cursor: pointer; font-size: 13px; color: var(--text-dim); border-bottom: 2px solid transparent; transition: all 0.15s; white-space: nowrap; }
+        .tab:hover { color: var(--text); } .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+        main { padding: 20px 28px; max-width: 1600px; margin: 0 auto; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+        .kpi-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+        .kpi-value { font-size: 24px; font-weight: 700; margin-top: 2px; }
+        .kpi-value.green { color: var(--green); } .kpi-value.red { color: var(--red); }
+        .kpi-value.blue { color: var(--blue); } .kpi-value.amber { color: var(--amber); }
+        .btn { padding: 7px 14px; border-radius: 6px; border: none; cursor: pointer; font-size: 12px; font-weight: 500; transition: all 0.15s; }
+        .btn-primary { background: var(--blue); color: white; } .btn-primary:hover { background: #2563eb; }
+        .btn-danger { background: var(--red); color: white; } .btn-sm { padding: 4px 10px; font-size: 11px; }
+        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-dim); } .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+        .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        th { text-align: left; padding: 10px 12px; background: var(--surface2); color: var(--text-dim); font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+        td { padding: 9px 12px; border-top: 1px solid var(--border); white-space: nowrap; }
         tr:hover td { background: var(--surface2); }
-        .tag {
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
+        .tag { padding: 2px 7px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+        .tag-open { background: #1e3a5f; color: var(--blue); } .tag-closed { background: #14532d; color: var(--green); } .tag-cancelled { background: #451a03; color: var(--amber); }
+        .pass { color: var(--green); font-weight: 600; } .fail { color: var(--red); font-weight: 600; }
+        .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; }
+        .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+        select, input[type="text"], input[type="number"], input[type="date"], input[type="password"], input[type="email"], textarea {
+            background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 6px; font-size: 12px;
         }
-        .tag-open { background: #1e3a5f; color: var(--blue); }
-        .tag-closed { background: #14532d; color: var(--green); }
-        .tag-cancelled { background: #451a03; color: var(--amber); }
-        .pass { color: var(--green); font-weight: 600; }
-        .fail { color: var(--red); font-weight: 600; }
-
-        /* ── Filters ── */
-        .toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        .filters { display: flex; gap: 10px; flex-wrap: wrap; }
-        select, input[type="text"], input[type="number"], input[type="date"], textarea {
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 7px 12px;
-            border-radius: 6px;
-            font-size: 13px;
-        }
-        select:focus, input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--blue);
-        }
-
-        /* ── Modal ── */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            z-index: 100;
-            justify-content: center;
-            align-items: flex-start;
-            padding-top: 60px;
-        }
+        select:focus, input:focus, textarea:focus { outline: none; border-color: var(--blue); }
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 100; justify-content: center; align-items: flex-start; padding-top: 40px; }
         .modal-overlay.active { display: flex; }
-        .modal {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            width: 700px;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 28px;
-        }
-        .modal h2 { margin-bottom: 20px; font-size: 18px; }
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-        .form-group { display: flex; flex-direction: column; gap: 4px; }
-        .form-group label { font-size: 12px; color: var(--text-dim); }
+        .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; width: 680px; max-height: 85vh; overflow-y: auto; padding: 24px; }
+        .modal h2 { margin-bottom: 16px; font-size: 16px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .form-group { display: flex; flex-direction: column; gap: 3px; }
+        .form-group label { font-size: 11px; color: var(--text-dim); }
         .form-group.full { grid-column: 1 / -1; }
-        .form-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
-        }
-
-        /* ── Section headers ── */
-        .section-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        /* ── Tab content ── */
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-
-        /* ── Deal detail panel ── */
-        .detail-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .detail-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-        .detail-item label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; }
-        .detail-item .val { font-size: 15px; font-weight: 500; }
-
-        /* ── Cash flow section ── */
-        .cf-form {
-            display: flex;
-            gap: 10px;
-            align-items: flex-end;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-            padding: 16px;
-            background: var(--surface2);
-            border-radius: 8px;
-        }
-        .cf-form .form-group { flex: 1; min-width: 120px; }
+        .form-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); }
+        .section-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+        .tab-content { display: none; } .tab-content.active { display: block; }
+        .detail-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 20px; }
+        .detail-item label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; } .detail-item .val { font-size: 14px; font-weight: 500; }
+        .cf-form, .mtm-form { display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 14px; padding: 14px; background: var(--surface2); border-radius: 8px; }
+        .cf-form .form-group, .mtm-form .form-group { flex: 1; min-width: 110px; }
+        /* Login */
+        .login-container { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .login-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 40px; width: 400px; }
+        .login-box h2 { text-align: center; margin-bottom: 24px; } .login-box h2 span { color: var(--blue); }
+        .login-box .form-group { margin-bottom: 14px; }
+        .login-box input { width: 100%; padding: 10px 12px; }
+        .login-box .btn { width: 100%; padding: 10px; font-size: 14px; margin-top: 8px; }
+        .login-box .toggle { text-align: center; margin-top: 14px; font-size: 12px; color: var(--text-dim); }
+        .login-box .toggle a { color: var(--blue); cursor: pointer; }
+        .login-error { color: var(--red); font-size: 12px; text-align: center; margin-top: 8px; display: none; }
+        .audit-details { max-width: 400px; overflow: hidden; text-overflow: ellipsis; font-size: 11px; color: var(--text-dim); }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
-    <header>
-        <h1><span>OpenChem</span> Deal Tracker</h1>
-        <div class="header-right">
-            <span class="firm-capital">Firm Capital: <strong id="firmCapital">$200,000,000</strong></span>
+    <!-- ══ LOGIN ══ -->
+    <div id="loginPage" class="login-container">
+        <div class="login-box">
+            <h2><span>OpenChem</span> Deal Tracker</h2>
+            <div id="loginForm">
+                <div class="form-group"><label>Username</label><input type="text" id="loginUser" placeholder="username"></div>
+                <div class="form-group"><label>Password</label><input type="password" id="loginPass" placeholder="password"></div>
+                <button class="btn btn-primary" onclick="doLogin()">Sign In</button>
+                <div class="login-error" id="loginError"></div>
+                <div class="toggle">No account? <a onclick="showRegister()">Register</a></div>
+            </div>
+            <div id="registerForm" class="hidden">
+                <div class="form-group"><label>Username</label><input type="text" id="regUser"></div>
+                <div class="form-group"><label>Full Name</label><input type="text" id="regName"></div>
+                <div class="form-group"><label>Email</label><input type="email" id="regEmail"></div>
+                <div class="form-group"><label>Password</label><input type="password" id="regPass"></div>
+                <div class="form-group"><label>Desk</label>
+                    <select id="regDesk"><option value="">Select...</option><option>Fertilizers</option><option>Steel</option><option>Sulphur</option></select>
+                </div>
+                <button class="btn btn-primary" onclick="doRegister()">Register</button>
+                <div class="login-error" id="regError"></div>
+                <div class="toggle"><a onclick="showLogin()">Back to login</a></div>
+            </div>
         </div>
-    </header>
-
-    <div class="tabs">
-        <div class="tab active" data-tab="dashboard">Dashboard</div>
-        <div class="tab" data-tab="deals">All Deals</div>
-        <div class="tab" data-tab="traders">Trader Scorecard</div>
-        <div class="tab" data-tab="detail" id="detailTab" style="display:none">Deal Detail</div>
     </div>
 
-    <main>
-        <!-- ══ DASHBOARD ══ -->
-        <div class="tab-content active" id="dashboard">
-            <div class="kpi-grid" id="kpiGrid"></div>
-            <div class="section-title">Deal Performance</div>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Ref</th><th>Commodity</th><th>Trader</th><th>Status</th>
-                            <th>Capital</th><th>P&L</th><th>ROE</th><th>Ann. Return</th>
-                            <th>IRR</th><th>Days</th><th>Hurdle</th>
-                        </tr>
-                    </thead>
+    <!-- ══ APP ══ -->
+    <div id="appPage" class="hidden">
+        <header>
+            <h1><span>OpenChem</span> Deal Tracker</h1>
+            <div class="header-right">
+                <span class="user-info" id="userInfo"></span>
+                <span style="color:var(--text-dim);font-size:12px">Capital: <strong>$200M</strong></span>
+                <button class="btn btn-outline btn-sm" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="dashboard">Dashboard</div>
+            <div class="tab" data-tab="deals">All Deals</div>
+            <div class="tab" data-tab="traders">Trader Scorecard</div>
+            <div class="tab" data-tab="audit">Audit Trail</div>
+            <div class="tab hidden" data-tab="detail" id="detailTab">Deal Detail</div>
+        </div>
+
+        <main>
+            <!-- DASHBOARD -->
+            <div class="tab-content active" id="dashboard">
+                <div class="kpi-grid" id="kpiGrid"></div>
+                <div class="section-title">Deal Performance (sorted by annualized return)</div>
+                <div class="table-wrap"><table>
+                    <thead><tr>
+                        <th>Ref</th><th>Commodity</th><th>Trader</th><th>Status</th>
+                        <th>Capital</th><th>P&L</th><th>Unreal. P&L</th><th>ROE</th><th>Ann. Return</th>
+                        <th>IRR</th><th>Days</th><th>Hurdle</th>
+                    </tr></thead>
                     <tbody id="dashboardTable"></tbody>
-                </table>
+                </table></div>
             </div>
-        </div>
 
-        <!-- ══ ALL DEALS ══ -->
-        <div class="tab-content" id="deals">
-            <div class="toolbar">
-                <div class="filters">
-                    <select id="filterStatus">
-                        <option value="">All Statuses</option>
-                        <option value="open">Open</option>
-                        <option value="closed">Closed</option>
-                        <option value="cancelled">Cancelled</option>
-                    </select>
-                    <select id="filterTrader"><option value="">All Traders</option></select>
-                    <select id="filterCommodity"><option value="">All Commodities</option></select>
+            <!-- ALL DEALS -->
+            <div class="tab-content" id="deals">
+                <div class="toolbar">
+                    <div class="filters">
+                        <select id="filterStatus"><option value="">All Statuses</option><option value="open">Open</option><option value="closed">Closed</option><option value="cancelled">Cancelled</option></select>
+                        <select id="filterTrader"><option value="">All Traders</option></select>
+                        <select id="filterCommodity"><option value="">All Commodities</option></select>
+                    </div>
+                    <div style="display:flex;gap:8px">
+                        <button class="btn btn-outline" onclick="exportCSV()">Export CSV</button>
+                        <label class="btn btn-outline" style="cursor:pointer">Import CSV<input type="file" accept=".csv" onchange="importCSV(this)" style="display:none"></label>
+                        <button class="btn btn-primary" onclick="openNewDealModal()">+ New Deal</button>
+                    </div>
                 </div>
-                <button class="btn btn-primary" onclick="openNewDealModal()">+ New Deal</button>
-            </div>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Ref</th><th>Commodity</th><th>Trader</th><th>Buy From</th>
-                            <th>Sell To</th><th>Qty (MT)</th><th>Buy $/MT</th><th>Sell $/MT</th>
-                            <th>Capital</th><th>Status</th><th>Trade Date</th><th></th>
-                        </tr>
-                    </thead>
+                <div class="table-wrap"><table>
+                    <thead><tr>
+                        <th>Ref</th><th>Commodity</th><th>Trader</th><th>Buy From</th>
+                        <th>Sell To</th><th>Qty (MT)</th><th>Buy $/MT</th><th>Sell $/MT</th>
+                        <th>Capital</th><th>Status</th><th>Trade Date</th><th></th>
+                    </tr></thead>
                     <tbody id="dealsTable"></tbody>
-                </table>
+                </table></div>
             </div>
-        </div>
 
-        <!-- ══ TRADER SCORECARD ══ -->
-        <div class="tab-content" id="traders">
-            <div class="section-title">Trader Performance</div>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Trader</th><th>Deals</th><th>Capital Deployed</th>
-                            <th>Total P&L</th><th>Wtd Avg Ann. Return</th><th>Hurdle Pass Rate</th>
-                        </tr>
-                    </thead>
+            <!-- TRADER SCORECARD -->
+            <div class="tab-content" id="traders">
+                <div class="section-title">Trader Performance</div>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>Trader</th><th>Deals</th><th>Capital Deployed</th><th>Realized P&L</th><th>Unrealized P&L</th><th>Wtd Avg Ann. Return</th><th>Hurdle Pass Rate</th></tr></thead>
                     <tbody id="traderTable"></tbody>
-                </table>
+                </table></div>
             </div>
-        </div>
 
-        <!-- ══ DEAL DETAIL ══ -->
-        <div class="tab-content" id="detail">
-            <div class="detail-header">
-                <h2 id="detailTitle">Deal Detail</h2>
-                <div style="display:flex;gap:8px">
-                    <button class="btn btn-primary btn-sm" onclick="switchTab('deals')">&larr; Back</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteDeal()">Delete Deal</button>
+            <!-- AUDIT TRAIL -->
+            <div class="tab-content" id="audit">
+                <div class="toolbar">
+                    <div class="filters">
+                        <input type="text" id="auditDealRef" placeholder="Filter by Deal Ref">
+                        <select id="auditEntity"><option value="">All Types</option><option value="deal">Deal</option><option value="cash_flow">Cash Flow</option><option value="market_price">MTM Price</option><option value="user">User</option></select>
+                        <button class="btn btn-outline btn-sm" onclick="loadAudit()">Filter</button>
+                    </div>
+                    <button class="btn btn-outline" onclick="exportAudit()">Export Audit CSV</button>
                 </div>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>Timestamp</th><th>User</th><th>Action</th><th>Type</th><th>Deal Ref</th><th>Details</th></tr></thead>
+                    <tbody id="auditTable"></tbody>
+                </table></div>
             </div>
-            <div class="detail-grid" id="detailGrid"></div>
 
-            <div class="section-title" style="margin-top:20px">Return Metrics</div>
-            <div class="kpi-grid" id="detailKpis"></div>
+            <!-- DEAL DETAIL -->
+            <div class="tab-content" id="detail">
+                <div class="detail-header">
+                    <h2 id="detailTitle" style="font-size:16px">Deal Detail</h2>
+                    <div style="display:flex;gap:6px">
+                        <button class="btn btn-outline btn-sm" onclick="switchTab('deals')">&larr; Back</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteDeal()">Delete</button>
+                    </div>
+                </div>
+                <div class="detail-grid" id="detailGrid"></div>
 
-            <div class="section-title" style="margin-top:24px">Cash Flows</div>
-            <div class="cf-form">
-                <div class="form-group">
-                    <label>Type</label>
-                    <select id="cfType">
-                        <option value="initial_outflow">Initial Outflow</option>
-                        <option value="margin_call">Margin Call</option>
-                        <option value="financing_cost">Financing Cost</option>
-                        <option value="storage_cost">Storage Cost</option>
-                        <option value="freight_cost">Freight Cost</option>
-                        <option value="insurance_cost">Insurance Cost</option>
-                        <option value="hedge_pnl">Hedge P&L</option>
-                        <option value="interim_receipt">Interim Receipt</option>
-                        <option value="final_settlement">Final Settlement</option>
-                    </select>
+                <div class="section-title">Return Metrics</div>
+                <div class="kpi-grid" id="detailKpis"></div>
+
+                <!-- MTM Section -->
+                <div class="section-title" style="margin-top:18px">Mark-to-Market</div>
+                <div class="mtm-form">
+                    <div class="form-group"><label>Date</label><input type="date" id="mtmDate"></div>
+                    <div class="form-group"><label>Market Price ($/MT)</label><input type="number" id="mtmPrice" step="0.01"></div>
+                    <div class="form-group"><label>Source</label>
+                        <select id="mtmSource"><option>Manual</option><option>Argus</option><option>Platts</option><option>ICIS</option><option>CRU</option></select>
+                    </div>
+                    <button class="btn btn-primary" onclick="addMTM()">Add Price</button>
                 </div>
-                <div class="form-group">
-                    <label>Amount ($)</label>
-                    <input type="number" id="cfAmount" step="0.01" placeholder="-ve = outflow">
+                <div class="table-wrap" style="margin-bottom:18px"><table>
+                    <thead><tr><th>Date</th><th>Price ($/MT)</th><th>Source</th><th></th></tr></thead>
+                    <tbody id="mtmTable"></tbody>
+                </table></div>
+
+                <!-- Cash Flows -->
+                <div class="section-title">Cash Flows</div>
+                <div class="cf-form">
+                    <div class="form-group"><label>Type</label>
+                        <select id="cfType">
+                            <option value="initial_outflow">Initial Outflow</option><option value="margin_call">Margin Call</option>
+                            <option value="financing_cost">Financing Cost</option><option value="storage_cost">Storage Cost</option>
+                            <option value="freight_cost">Freight Cost</option><option value="insurance_cost">Insurance Cost</option>
+                            <option value="inspection_cost">Inspection Cost</option><option value="customs_duty">Customs Duty</option>
+                            <option value="demurrage">Demurrage</option><option value="hedge_pnl">Hedge P&L</option>
+                            <option value="interim_receipt">Interim Receipt</option><option value="final_settlement">Final Settlement</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Amount ($)</label><input type="number" id="cfAmount" step="0.01" placeholder="-ve=outflow"></div>
+                    <div class="form-group"><label>Date</label><input type="date" id="cfDate"></div>
+                    <div class="form-group"><label>Description</label><input type="text" id="cfDesc" placeholder="Optional"></div>
+                    <button class="btn btn-primary" onclick="addCashFlow()">Add</button>
                 </div>
-                <div class="form-group">
-                    <label>Date</label>
-                    <input type="date" id="cfDate">
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <input type="text" id="cfDesc" placeholder="Optional">
-                </div>
-                <button class="btn btn-primary" onclick="addCashFlow()">Add</button>
-            </div>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr><th>Date</th><th>Type</th><th>Amount</th><th>Description</th><th></th></tr>
-                    </thead>
+                <div class="table-wrap"><table>
+                    <thead><tr><th>Date</th><th>Type</th><th>Amount</th><th>Description</th><th></th></tr></thead>
                     <tbody id="cfTable"></tbody>
-                </table>
+                </table></div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
-    <!-- ══ NEW DEAL MODAL ══ -->
+    <!-- NEW DEAL MODAL -->
     <div class="modal-overlay" id="dealModal">
         <div class="modal">
-            <h2 id="modalTitle">New Deal</h2>
+            <h2>New Deal</h2>
             <div class="form-grid">
-                <div class="form-group">
-                    <label>Deal Ref *</label>
-                    <input type="text" id="fRef" placeholder="e.g. OC-2026-001">
-                </div>
-                <div class="form-group">
-                    <label>Commodity *</label>
-                    <input type="text" id="fCommodity" placeholder="e.g. Crude Oil, Copper">
-                </div>
-                <div class="form-group">
-                    <label>Trader *</label>
-                    <input type="text" id="fTrader" placeholder="Trader name">
-                </div>
-                <div class="form-group">
-                    <label>Desk</label>
-                    <input type="text" id="fDesk" placeholder="e.g. Metals, Energy">
-                </div>
-                <div class="form-group">
-                    <label>Buy From (Counterparty) *</label>
-                    <input type="text" id="fBuyFrom" placeholder="Supplier name">
-                </div>
-                <div class="form-group">
-                    <label>Sell To (Counterparty) *</label>
-                    <input type="text" id="fSellTo" placeholder="Buyer name">
-                </div>
-                <div class="form-group">
-                    <label>Quantity (MT) *</label>
-                    <input type="number" id="fQty" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label>Buy Price ($/MT) *</label>
-                    <input type="number" id="fBuyPrice" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label>Sell Price ($/MT) *</label>
-                    <input type="number" id="fSellPrice" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label>Own Capital Deployed ($) *</label>
-                    <input type="number" id="fCapital" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label>Leverage / Borrowed ($)</label>
-                    <input type="number" id="fLeverage" step="0.01" value="0">
-                </div>
-                <div class="form-group">
-                    <label>Hurdle Rate (%)</label>
-                    <input type="number" id="fHurdle" step="0.01" value="15">
-                </div>
-                <div class="form-group">
-                    <label>Trade Date *</label>
-                    <input type="date" id="fTradeDate">
-                </div>
-                <div class="form-group">
-                    <label>Expected Close Date *</label>
-                    <input type="date" id="fExpClose">
-                </div>
-                <div class="form-group full">
-                    <label>Notes</label>
-                    <textarea id="fNotes" rows="2" placeholder="Optional notes"></textarea>
-                </div>
+                <div class="form-group"><label>Deal Ref *</label><input type="text" id="fRef" placeholder="OC-2026-XXX"></div>
+                <div class="form-group"><label>Commodity *</label><select id="fCommodity"></select></div>
+                <div class="form-group"><label>Trader *</label><input type="text" id="fTrader"></div>
+                <div class="form-group"><label>Desk</label><select id="fDesk"><option value="">Select...</option></select></div>
+                <div class="form-group"><label>Buy From *</label><input type="text" id="fBuyFrom"></div>
+                <div class="form-group"><label>Sell To *</label><input type="text" id="fSellTo"></div>
+                <div class="form-group"><label>Qty (MT) *</label><input type="number" id="fQty" step="0.01"></div>
+                <div class="form-group"><label>Buy $/MT *</label><input type="number" id="fBuyPrice" step="0.01"></div>
+                <div class="form-group"><label>Sell $/MT *</label><input type="number" id="fSellPrice" step="0.01"></div>
+                <div class="form-group"><label>Own Capital ($) *</label><input type="number" id="fCapital" step="0.01"></div>
+                <div class="form-group"><label>Leverage ($)</label><input type="number" id="fLeverage" step="0.01" value="0"></div>
+                <div class="form-group"><label>Hurdle Rate (%)</label><input type="number" id="fHurdle" step="0.01" value="15"></div>
+                <div class="form-group"><label>Trade Date *</label><input type="date" id="fTradeDate"></div>
+                <div class="form-group"><label>Exp Close Date *</label><input type="date" id="fExpClose"></div>
+                <div class="form-group full"><label>Notes</label><textarea id="fNotes" rows="2"></textarea></div>
             </div>
             <div class="form-actions">
-                <button class="btn" style="background:var(--surface2)" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
                 <button class="btn btn-primary" onclick="submitDeal()">Create Deal</button>
             </div>
         </div>
     </div>
 
     <script>
-        const API = '/api';
-        let currentDealId = null;
+    const API = '/api';
+    let currentDealId = null;
+    let authToken = localStorage.getItem('openchem_token');
+    let currentUser = null;
 
-        // ── Formatting ──
-        const fmt = (n) => {
-            if (n == null) return '—';
-            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
-        };
-        const fmtPct = (n) => n != null ? n.toFixed(2) + '%' : '—';
-        const fmtNum = (n) => n != null ? new Intl.NumberFormat('en-US').format(n) : '—';
-        const statusTag = (s) => `<span class="tag tag-${s}">${s.toUpperCase()}</span>`;
-        const hurdleTag = (pass) => pass ? '<span class="pass">PASS</span>' : '<span class="fail">FAIL</span>';
-        const cfTypeLabel = (t) => t.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    // ── Auth helpers ──
+    function authHeaders() {
+        const h = {'Content-Type': 'application/json'};
+        if (authToken) h['Authorization'] = 'Bearer ' + authToken;
+        return h;
+    }
+    function apiFetch(url, opts = {}) {
+        opts.headers = {...authHeaders(), ...(opts.headers || {})};
+        return fetch(url, opts);
+    }
 
-        // ── Tabs ──
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', () => switchTab(tab.dataset.tab));
-        });
+    // ── Formatting ──
+    const fmt = n => n != null ? new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n) : '—';
+    const fmtPct = n => n != null ? n.toFixed(2)+'%' : '—';
+    const fmtNum = n => n != null ? new Intl.NumberFormat('en-US').format(n) : '—';
+    const statusTag = s => `<span class="tag tag-${s}">${s.toUpperCase()}</span>`;
+    const hurdleTag = p => p ? '<span class="pass">PASS</span>' : '<span class="fail">FAIL</span>';
+    const cfLabel = t => t.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
 
-        function switchTab(name) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === name));
-            if (name === 'dashboard') loadDashboard();
-            if (name === 'deals') loadDeals();
-            if (name === 'traders') loadTraders();
-            if (name === 'detail' && currentDealId) loadDealDetail(currentDealId);
+    // ── Init ──
+    async function init() {
+        if (authToken) {
+            try {
+                const r = await apiFetch(`${API}/auth/me`);
+                if (r.ok) {
+                    currentUser = await r.json();
+                    showApp();
+                    return;
+                }
+            } catch(e) {}
+            localStorage.removeItem('openchem_token');
+            authToken = null;
         }
+        showLoginPage();
+    }
 
-        // ── Dashboard ──
-        async function loadDashboard() {
-            const [portfolio, dealMetrics] = await Promise.all([
-                fetch(`${API}/analytics/portfolio`).then(r => r.json()),
-                fetch(`${API}/analytics/deals`).then(r => r.json()),
-            ]);
-
-            document.getElementById('kpiGrid').innerHTML = `
-                <div class="kpi-card"><div class="kpi-label">Total Deals</div><div class="kpi-value blue">${portfolio.total_deals}</div></div>
-                <div class="kpi-card"><div class="kpi-label">Capital Deployed</div><div class="kpi-value">${fmt(portfolio.total_capital_deployed)}</div></div>
-                <div class="kpi-card"><div class="kpi-label">Capital Utilization</div><div class="kpi-value blue">${fmtPct(portfolio.capital_utilization_pct)}</div></div>
-                <div class="kpi-card"><div class="kpi-label">Total P&L</div><div class="kpi-value ${portfolio.total_pnl >= 0 ? 'green' : 'red'}">${fmt(portfolio.total_pnl)}</div></div>
-                <div class="kpi-card"><div class="kpi-label">Wtd Avg Ann. Return</div><div class="kpi-value ${portfolio.weighted_avg_annualized_pct >= 0 ? 'green' : 'red'}">${fmtPct(portfolio.weighted_avg_annualized_pct)}</div></div>
-                <div class="kpi-card"><div class="kpi-label">Hurdle Pass Rate</div><div class="kpi-value ${portfolio.hurdle_pass_rate_pct >= 50 ? 'green' : 'amber'}">${fmtPct(portfolio.hurdle_pass_rate_pct)}</div></div>
-                <div class="kpi-card"><div class="kpi-label">Firm-Level ROE</div><div class="kpi-value ${portfolio.firm_level_roe_pct >= 0 ? 'green' : 'red'}">${fmtPct(portfolio.firm_level_roe_pct)}</div></div>
-            `;
-
-            const sorted = dealMetrics.sort((a, b) => b.annualized_return_pct - a.annualized_return_pct);
-            document.getElementById('dashboardTable').innerHTML = sorted.map(d => `
-                <tr style="cursor:pointer" onclick="viewDeal(${d.deal_id})">
-                    <td><strong>${d.deal_ref}</strong></td>
-                    <td>${d.commodity}</td>
-                    <td>${d.trader}</td>
-                    <td>${statusTag(d.status)}</td>
-                    <td>${fmt(d.capital_deployed)}</td>
-                    <td style="color:${d.total_pnl >= 0 ? 'var(--green)' : 'var(--red)'}">${fmt(d.total_pnl)}</td>
-                    <td>${fmtPct(d.roe_pct)}</td>
-                    <td style="font-weight:600;color:${d.annualized_return_pct >= 0 ? 'var(--green)' : 'var(--red)'}">${fmtPct(d.annualized_return_pct)}</td>
-                    <td>${fmtPct(d.irr_pct)}</td>
-                    <td>${d.duration_days}</td>
-                    <td>${hurdleTag(d.meets_hurdle)}</td>
-                </tr>
-            `).join('');
-        }
-
-        // ── Deals list ──
-        async function loadDeals() {
-            const params = new URLSearchParams();
-            const s = document.getElementById('filterStatus').value;
-            const t = document.getElementById('filterTrader').value;
-            const c = document.getElementById('filterCommodity').value;
-            if (s) params.set('status', s);
-            if (t) params.set('trader', t);
-            if (c) params.set('commodity', c);
-
-            const deals = await fetch(`${API}/deals?${params}`).then(r => r.json());
-
-            // Populate filter dropdowns
-            const traders = [...new Set(deals.map(d => d.trader))].sort();
-            const commodities = [...new Set(deals.map(d => d.commodity))].sort();
-            populateSelect('filterTrader', traders, t);
-            populateSelect('filterCommodity', commodities, c);
-
-            document.getElementById('dealsTable').innerHTML = deals.map(d => `
-                <tr>
-                    <td><a href="#" onclick="viewDeal(${d.id});return false" style="color:var(--blue)">${d.deal_ref}</a></td>
-                    <td>${d.commodity}</td>
-                    <td>${d.trader}</td>
-                    <td>${d.counterparty_buy}</td>
-                    <td>${d.counterparty_sell}</td>
-                    <td>${fmtNum(d.quantity_mt)}</td>
-                    <td>${fmt(d.buy_price_per_mt)}</td>
-                    <td>${fmt(d.sell_price_per_mt)}</td>
-                    <td>${fmt(d.total_capital_deployed)}</td>
-                    <td>${statusTag(d.status)}</td>
-                    <td>${d.trade_date}</td>
-                    <td><button class="btn btn-sm" style="background:var(--surface2)" onclick="viewDeal(${d.id})">View</button></td>
-                </tr>
-            `).join('');
-        }
-
-        function populateSelect(id, items, current) {
-            const el = document.getElementById(id);
-            const firstOpt = el.options[0].outerHTML;
-            el.innerHTML = firstOpt + items.map(i => `<option value="${i}" ${i === current ? 'selected' : ''}>${i}</option>`).join('');
-        }
-
-        // Filter change handlers
-        ['filterStatus', 'filterTrader', 'filterCommodity'].forEach(id => {
-            document.getElementById(id).addEventListener('change', loadDeals);
-        });
-
-        // ── Traders ──
-        async function loadTraders() {
-            const traders = await fetch(`${API}/analytics/traders`).then(r => r.json());
-            document.getElementById('traderTable').innerHTML = traders.map(t => `
-                <tr>
-                    <td><strong>${t.trader}</strong></td>
-                    <td>${t.deal_count}</td>
-                    <td>${fmt(t.total_capital_deployed)}</td>
-                    <td style="color:${t.total_pnl >= 0 ? 'var(--green)' : 'var(--red)'}">${fmt(t.total_pnl)}</td>
-                    <td style="font-weight:600;color:${t.weighted_avg_annualized_pct >= 0 ? 'var(--green)' : 'var(--red)'}">${fmtPct(t.weighted_avg_annualized_pct)}</td>
-                    <td style="color:${t.hurdle_pass_rate_pct >= 50 ? 'var(--green)' : 'var(--amber)'}">
-                        ${fmtPct(t.hurdle_pass_rate_pct)}
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        // ── Deal detail ──
-        async function viewDeal(id) {
-            currentDealId = id;
-            document.getElementById('detailTab').style.display = '';
-            switchTab('detail');
-        }
-
-        async function loadDealDetail(id) {
-            const [deal, metrics] = await Promise.all([
-                fetch(`${API}/deals/${id}`).then(r => r.json()),
-                fetch(`${API}/analytics/deals`).then(r => r.json()),
-            ]);
-
-            const m = metrics.find(dm => dm.deal_id === id) || {};
-
-            document.getElementById('detailTitle').textContent = `${deal.deal_ref} — ${deal.commodity}`;
-
-            document.getElementById('detailGrid').innerHTML = `
-                <div class="detail-item"><label>Trader</label><div class="val">${deal.trader}</div></div>
-                <div class="detail-item"><label>Desk</label><div class="val">${deal.desk || '—'}</div></div>
-                <div class="detail-item"><label>Buy From</label><div class="val">${deal.counterparty_buy}</div></div>
-                <div class="detail-item"><label>Sell To</label><div class="val">${deal.counterparty_sell}</div></div>
-                <div class="detail-item"><label>Quantity</label><div class="val">${fmtNum(deal.quantity_mt)} MT</div></div>
-                <div class="detail-item"><label>Buy Price</label><div class="val">${fmt(deal.buy_price_per_mt)}/MT</div></div>
-                <div class="detail-item"><label>Sell Price</label><div class="val">${fmt(deal.sell_price_per_mt)}/MT</div></div>
-                <div class="detail-item"><label>Gross Margin</label><div class="val">${fmt((deal.sell_price_per_mt - deal.buy_price_per_mt) * deal.quantity_mt)}</div></div>
-                <div class="detail-item"><label>Capital Deployed</label><div class="val">${fmt(deal.total_capital_deployed)}</div></div>
-                <div class="detail-item"><label>Leverage</label><div class="val">${fmt(deal.leverage_amount)}</div></div>
-                <div class="detail-item"><label>Trade Date</label><div class="val">${deal.trade_date}</div></div>
-                <div class="detail-item"><label>Exp. Close</label><div class="val">${deal.expected_close_date}</div></div>
-                <div class="detail-item"><label>Act. Close</label><div class="val">${deal.actual_close_date || '—'}</div></div>
-                <div class="detail-item"><label>Status</label><div class="val">${statusTag(deal.status)}</div></div>
-            `;
-
-            document.getElementById('detailKpis').innerHTML = `
-                <div class="kpi-card"><div class="kpi-label">Total P&L</div><div class="kpi-value ${(m.total_pnl||0) >= 0 ? 'green' : 'red'}">${fmt(m.total_pnl)}</div></div>
-                <div class="kpi-card"><div class="kpi-label">ROE</div><div class="kpi-value ${(m.roe_pct||0) >= 0 ? 'green' : 'red'}">${fmtPct(m.roe_pct)}</div></div>
-                <div class="kpi-card"><div class="kpi-label">Annualized Return</div><div class="kpi-value ${(m.annualized_return_pct||0) >= 0 ? 'green' : 'red'}">${fmtPct(m.annualized_return_pct)}</div></div>
-                <div class="kpi-card"><div class="kpi-label">IRR (XIRR)</div><div class="kpi-value blue">${fmtPct(m.irr_pct)}</div></div>
-                <div class="kpi-card"><div class="kpi-label">Duration</div><div class="kpi-value">${m.duration_days || 0} days</div></div>
-                <div class="kpi-card"><div class="kpi-label">Hurdle (${fmtPct(m.hurdle_rate_pct)})</div><div class="kpi-value">${m.meets_hurdle != null ? hurdleTag(m.meets_hurdle) : '—'}</div></div>
-            `;
-
-            const cfs = (deal.cash_flows || []).sort((a, b) => a.flow_date.localeCompare(b.flow_date));
-            document.getElementById('cfTable').innerHTML = cfs.map(cf => `
-                <tr>
-                    <td>${cf.flow_date}</td>
-                    <td>${cfTypeLabel(cf.flow_type)}</td>
-                    <td style="color:${cf.amount >= 0 ? 'var(--green)' : 'var(--red)'};font-weight:600">${fmt(cf.amount)}</td>
-                    <td>${cf.description || ''}</td>
-                    <td><button class="btn btn-danger btn-sm" onclick="deleteCashFlow(${cf.id})">×</button></td>
-                </tr>
-            `).join('');
-        }
-
-        // ── Cash flow CRUD ──
-        async function addCashFlow() {
-            const body = {
-                flow_type: document.getElementById('cfType').value,
-                amount: parseFloat(document.getElementById('cfAmount').value),
-                flow_date: document.getElementById('cfDate').value,
-                description: document.getElementById('cfDesc').value || null,
-            };
-            if (!body.amount || !body.flow_date) return alert('Amount and Date are required');
-            await fetch(`${API}/deals/${currentDealId}/cashflows`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body),
-            });
-            document.getElementById('cfAmount').value = '';
-            document.getElementById('cfDesc').value = '';
-            loadDealDetail(currentDealId);
-        }
-
-        async function deleteCashFlow(cfId) {
-            if (!confirm('Delete this cash flow?')) return;
-            await fetch(`${API}/cashflows/${cfId}`, { method: 'DELETE' });
-            loadDealDetail(currentDealId);
-        }
-
-        async function deleteDeal() {
-            if (!confirm('Delete this deal and all its cash flows?')) return;
-            await fetch(`${API}/deals/${currentDealId}`, { method: 'DELETE' });
-            document.getElementById('detailTab').style.display = 'none';
-            switchTab('deals');
-        }
-
-        // ── New Deal Modal ──
-        function openNewDealModal() {
-            document.getElementById('dealModal').classList.add('active');
-            // Set default dates
-            const today = new Date().toISOString().slice(0, 10);
-            document.getElementById('fTradeDate').value = today;
-        }
-        function closeModal() {
-            document.getElementById('dealModal').classList.remove('active');
-        }
-
-        async function submitDeal() {
-            const body = {
-                deal_ref: document.getElementById('fRef').value,
-                commodity: document.getElementById('fCommodity').value,
-                trader: document.getElementById('fTrader').value,
-                desk: document.getElementById('fDesk').value || null,
-                counterparty_buy: document.getElementById('fBuyFrom').value,
-                counterparty_sell: document.getElementById('fSellTo').value,
-                quantity_mt: parseFloat(document.getElementById('fQty').value),
-                buy_price_per_mt: parseFloat(document.getElementById('fBuyPrice').value),
-                sell_price_per_mt: parseFloat(document.getElementById('fSellPrice').value),
-                total_capital_deployed: parseFloat(document.getElementById('fCapital').value),
-                leverage_amount: parseFloat(document.getElementById('fLeverage').value) || 0,
-                hurdle_rate_pct: parseFloat(document.getElementById('fHurdle').value) || 15,
-                trade_date: document.getElementById('fTradeDate').value,
-                expected_close_date: document.getElementById('fExpClose').value,
-                notes: document.getElementById('fNotes').value || null,
-                cash_flows: [],
-            };
-
-            if (!body.deal_ref || !body.commodity || !body.trader || !body.counterparty_buy ||
-                !body.counterparty_sell || !body.quantity_mt || !body.buy_price_per_mt ||
-                !body.sell_price_per_mt || !body.total_capital_deployed || !body.trade_date ||
-                !body.expected_close_date) {
-                return alert('Please fill in all required fields (marked with *)');
-            }
-
-            const res = await fetch(`${API}/deals`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body),
-            });
-
-            if (!res.ok) {
-                const err = await res.json();
-                return alert(err.detail || 'Error creating deal');
-            }
-
-            closeModal();
-            // Clear form
-            ['fRef','fCommodity','fTrader','fDesk','fBuyFrom','fSellTo','fQty',
-             'fBuyPrice','fSellPrice','fCapital','fNotes'].forEach(id => {
-                document.getElementById(id).value = '';
-            });
-            document.getElementById('fLeverage').value = '0';
-            document.getElementById('fHurdle').value = '15';
-
-            loadDeals();
-        }
-
-        // ── Init ──
+    function showLoginPage() {
+        document.getElementById('loginPage').classList.remove('hidden');
+        document.getElementById('appPage').classList.add('hidden');
+    }
+    function showApp() {
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('appPage').classList.remove('hidden');
+        document.getElementById('userInfo').textContent = currentUser.full_name + ' (' + currentUser.role + ')';
+        loadConfig();
         loadDashboard();
+    }
+    function showRegister() { document.getElementById('loginForm').classList.add('hidden'); document.getElementById('registerForm').classList.remove('hidden'); }
+    function showLogin() { document.getElementById('registerForm').classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
+
+    async function doLogin() {
+        const body = new URLSearchParams({username: document.getElementById('loginUser').value, password: document.getElementById('loginPass').value});
+        const r = await fetch(`${API}/auth/login`, {method:'POST', body});
+        if (!r.ok) { const e = await r.json(); showErr('loginError', e.detail || 'Login failed'); return; }
+        const data = await r.json();
+        authToken = data.access_token;
+        currentUser = data.user;
+        localStorage.setItem('openchem_token', authToken);
+        showApp();
+    }
+    async function doRegister() {
+        const body = {
+            username: document.getElementById('regUser').value,
+            full_name: document.getElementById('regName').value,
+            email: document.getElementById('regEmail').value,
+            password: document.getElementById('regPass').value,
+            desk: document.getElementById('regDesk').value || null,
+            role: 'trader',
+        };
+        const r = await apiFetch(`${API}/auth/register`, {method:'POST', body: JSON.stringify(body)});
+        if (!r.ok) { const e = await r.json(); showErr('regError', e.detail || 'Registration failed'); return; }
+        showLogin();
+        document.getElementById('loginUser').value = body.username;
+    }
+    function logout() { localStorage.removeItem('openchem_token'); authToken=null; currentUser=null; location.reload(); }
+    function showErr(id, msg) { const el=document.getElementById(id); el.textContent=msg; el.style.display='block'; setTimeout(()=>el.style.display='none',4000); }
+
+    // ── Config ──
+    let appConfig = {};
+    async function loadConfig() {
+        const r = await fetch(`${API}/config`); appConfig = await r.json();
+        const comSel = document.getElementById('fCommodity');
+        comSel.innerHTML = (appConfig.commodities||[]).map(c=>`<option>${c}</option>`).join('');
+        const deskSel = document.getElementById('fDesk');
+        deskSel.innerHTML = '<option value="">Select...</option>' + (appConfig.desks||[]).map(d=>`<option>${d}</option>`).join('');
+    }
+
+    // ── Tabs ──
+    document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
+    function switchTab(name) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === name));
+        if (name==='dashboard') loadDashboard();
+        if (name==='deals') loadDeals();
+        if (name==='traders') loadTraders();
+        if (name==='audit') loadAudit();
+        if (name==='detail' && currentDealId) loadDealDetail(currentDealId);
+    }
+
+    // ── Dashboard ──
+    async function loadDashboard() {
+        const [port, metrics] = await Promise.all([
+            fetch(`${API}/analytics/portfolio`).then(r=>r.json()),
+            fetch(`${API}/analytics/deals`).then(r=>r.json()),
+        ]);
+        document.getElementById('kpiGrid').innerHTML = `
+            <div class="kpi-card"><div class="kpi-label">Total Deals</div><div class="kpi-value blue">${port.total_deals}</div></div>
+            <div class="kpi-card"><div class="kpi-label">Open / Closed</div><div class="kpi-value">${port.open_deals} / ${port.closed_deals}</div></div>
+            <div class="kpi-card"><div class="kpi-label">Capital Deployed</div><div class="kpi-value">${fmt(port.total_capital_deployed)}</div></div>
+            <div class="kpi-card"><div class="kpi-label">Utilization</div><div class="kpi-value blue">${fmtPct(port.capital_utilization_pct)}</div></div>
+            <div class="kpi-card"><div class="kpi-label">Realized P&L</div><div class="kpi-value ${port.total_pnl>=0?'green':'red'}">${fmt(port.total_pnl)}</div></div>
+            <div class="kpi-card"><div class="kpi-label">Unrealized P&L</div><div class="kpi-value ${port.total_unrealized_pnl>=0?'green':'red'}">${fmt(port.total_unrealized_pnl)}</div></div>
+            <div class="kpi-card"><div class="kpi-label">Wtd Avg Ann. Ret</div><div class="kpi-value ${port.weighted_avg_annualized_pct>=0?'green':'red'}">${fmtPct(port.weighted_avg_annualized_pct)}</div></div>
+            <div class="kpi-card"><div class="kpi-label">Hurdle Pass Rate</div><div class="kpi-value ${port.hurdle_pass_rate_pct>=50?'green':'amber'}">${fmtPct(port.hurdle_pass_rate_pct)}</div></div>
+        `;
+        const sorted = metrics.sort((a,b) => b.annualized_return_pct - a.annualized_return_pct);
+        document.getElementById('dashboardTable').innerHTML = sorted.map(d => `
+            <tr style="cursor:pointer" onclick="viewDeal(${d.deal_id})">
+                <td><strong>${d.deal_ref}</strong></td><td>${d.commodity}</td><td>${d.trader}</td><td>${statusTag(d.status)}</td>
+                <td>${fmt(d.capital_deployed)}</td>
+                <td style="color:${d.total_pnl>=0?'var(--green)':'var(--red)'}">${fmt(d.total_pnl)}</td>
+                <td style="color:${(d.unrealized_pnl||0)>=0?'var(--green)':'var(--red)'}">${d.unrealized_pnl!=null?fmt(d.unrealized_pnl):'—'}</td>
+                <td>${fmtPct(d.roe_pct)}</td>
+                <td style="font-weight:600;color:${d.annualized_return_pct>=0?'var(--green)':'var(--red)'}">${fmtPct(d.annualized_return_pct)}</td>
+                <td>${fmtPct(d.irr_pct)}</td><td>${d.duration_days}</td><td>${hurdleTag(d.meets_hurdle)}</td>
+            </tr>
+        `).join('');
+    }
+
+    // ── Deals list ──
+    async function loadDeals() {
+        const p = new URLSearchParams();
+        const s=document.getElementById('filterStatus').value, t=document.getElementById('filterTrader').value, c=document.getElementById('filterCommodity').value;
+        if(s)p.set('status',s); if(t)p.set('trader',t); if(c)p.set('commodity',c);
+        const deals = await fetch(`${API}/deals?${p}`).then(r=>r.json());
+        populateSelect('filterTrader',[...new Set(deals.map(d=>d.trader))].sort(),t);
+        populateSelect('filterCommodity',[...new Set(deals.map(d=>d.commodity))].sort(),c);
+        document.getElementById('dealsTable').innerHTML = deals.map(d => `
+            <tr>
+                <td><a href="#" onclick="viewDeal(${d.id});return false" style="color:var(--blue)">${d.deal_ref}</a></td>
+                <td>${d.commodity}</td><td>${d.trader}</td><td>${d.counterparty_buy}</td><td>${d.counterparty_sell}</td>
+                <td>${fmtNum(d.quantity_mt)}</td><td>${fmt(d.buy_price_per_mt)}</td><td>${fmt(d.sell_price_per_mt)}</td>
+                <td>${fmt(d.total_capital_deployed)}</td><td>${statusTag(d.status)}</td><td>${d.trade_date}</td>
+                <td><button class="btn btn-sm btn-outline" onclick="viewDeal(${d.id})">View</button></td>
+            </tr>
+        `).join('');
+    }
+    function populateSelect(id,items,cur) { const el=document.getElementById(id); const f=el.options[0].outerHTML; el.innerHTML=f+items.map(i=>`<option value="${i}" ${i===cur?'selected':''}>${i}</option>`).join(''); }
+    ['filterStatus','filterTrader','filterCommodity'].forEach(id=>document.getElementById(id).addEventListener('change',loadDeals));
+
+    // ── Traders ──
+    async function loadTraders() {
+        const traders = await fetch(`${API}/analytics/traders`).then(r=>r.json());
+        document.getElementById('traderTable').innerHTML = traders.map(t => `
+            <tr>
+                <td><strong>${t.trader}</strong></td><td>${t.deal_count}</td>
+                <td>${fmt(t.total_capital_deployed)}</td>
+                <td style="color:${t.total_pnl>=0?'var(--green)':'var(--red)'}">${fmt(t.total_pnl)}</td>
+                <td style="color:${t.total_unrealized_pnl>=0?'var(--green)':'var(--red)'}">${fmt(t.total_unrealized_pnl)}</td>
+                <td style="font-weight:600;color:${t.weighted_avg_annualized_pct>=0?'var(--green)':'var(--red)'}">${fmtPct(t.weighted_avg_annualized_pct)}</td>
+                <td style="color:${t.hurdle_pass_rate_pct>=50?'var(--green)':'var(--amber)'}">${fmtPct(t.hurdle_pass_rate_pct)}</td>
+            </tr>
+        `).join('');
+    }
+
+    // ── Audit ──
+    async function loadAudit() {
+        const p = new URLSearchParams();
+        const dr=document.getElementById('auditDealRef').value, et=document.getElementById('auditEntity').value;
+        if(dr)p.set('deal_ref',dr); if(et)p.set('entity_type',et);
+        const logs = await fetch(`${API}/audit?${p}`).then(r=>r.json());
+        document.getElementById('auditTable').innerHTML = logs.map(l => `
+            <tr>
+                <td>${l.timestamp ? new Date(l.timestamp).toLocaleString() : ''}</td>
+                <td>${l.user}</td>
+                <td><span class="tag tag-${l.action==='create'?'open':l.action==='delete'?'cancelled':'closed'}">${l.action.toUpperCase()}</span></td>
+                <td>${l.entity_type}</td>
+                <td>${l.deal_ref||''}</td>
+                <td class="audit-details" title="${(l.details||'').replace(/"/g,'&quot;')}">${l.details||''}</td>
+            </tr>
+        `).join('');
+    }
+
+    // ── Deal detail ──
+    async function viewDeal(id) {
+        currentDealId = id;
+        document.getElementById('detailTab').classList.remove('hidden');
+        switchTab('detail');
+    }
+    async function loadDealDetail(id) {
+        const [deal, metrics] = await Promise.all([
+            apiFetch(`${API}/deals/${id}`).then(r=>r.json()),
+            fetch(`${API}/analytics/deals`).then(r=>r.json()),
+        ]);
+        const m = metrics.find(dm=>dm.deal_id===id) || {};
+        document.getElementById('detailTitle').textContent = `${deal.deal_ref} — ${deal.commodity}`;
+        document.getElementById('detailGrid').innerHTML = `
+            <div class="detail-item"><label>Trader</label><div class="val">${deal.trader}</div></div>
+            <div class="detail-item"><label>Desk</label><div class="val">${deal.desk||'—'}</div></div>
+            <div class="detail-item"><label>Buy From</label><div class="val">${deal.counterparty_buy}</div></div>
+            <div class="detail-item"><label>Sell To</label><div class="val">${deal.counterparty_sell}</div></div>
+            <div class="detail-item"><label>Quantity</label><div class="val">${fmtNum(deal.quantity_mt)} MT</div></div>
+            <div class="detail-item"><label>Buy Price</label><div class="val">${fmt(deal.buy_price_per_mt)}/MT</div></div>
+            <div class="detail-item"><label>Sell Price</label><div class="val">${fmt(deal.sell_price_per_mt)}/MT</div></div>
+            <div class="detail-item"><label>Gross Margin</label><div class="val">${fmt((deal.sell_price_per_mt-deal.buy_price_per_mt)*deal.quantity_mt)}</div></div>
+            <div class="detail-item"><label>Capital</label><div class="val">${fmt(deal.total_capital_deployed)}</div></div>
+            <div class="detail-item"><label>Leverage</label><div class="val">${fmt(deal.leverage_amount)}</div></div>
+            <div class="detail-item"><label>Trade Date</label><div class="val">${deal.trade_date}</div></div>
+            <div class="detail-item"><label>Exp Close</label><div class="val">${deal.expected_close_date}</div></div>
+            <div class="detail-item"><label>Act Close</label><div class="val">${deal.actual_close_date||'—'}</div></div>
+            <div class="detail-item"><label>Status</label><div class="val">${statusTag(deal.status)}</div></div>
+        `;
+        document.getElementById('detailKpis').innerHTML = `
+            <div class="kpi-card"><div class="kpi-label">Total P&L</div><div class="kpi-value ${(m.total_pnl||0)>=0?'green':'red'}">${fmt(m.total_pnl)}</div></div>
+            <div class="kpi-card"><div class="kpi-label">ROE</div><div class="kpi-value ${(m.roe_pct||0)>=0?'green':'red'}">${fmtPct(m.roe_pct)}</div></div>
+            <div class="kpi-card"><div class="kpi-label">Ann. Return</div><div class="kpi-value ${(m.annualized_return_pct||0)>=0?'green':'red'}">${fmtPct(m.annualized_return_pct)}</div></div>
+            <div class="kpi-card"><div class="kpi-label">IRR (XIRR)</div><div class="kpi-value blue">${fmtPct(m.irr_pct)}</div></div>
+            <div class="kpi-card"><div class="kpi-label">Duration</div><div class="kpi-value">${m.duration_days||0}d</div></div>
+            <div class="kpi-card"><div class="kpi-label">Hurdle (${fmtPct(m.hurdle_rate_pct)})</div><div class="kpi-value">${m.meets_hurdle!=null?hurdleTag(m.meets_hurdle):'—'}</div></div>
+            <div class="kpi-card"><div class="kpi-label">MTM Price</div><div class="kpi-value blue">${m.mtm_price?'$'+m.mtm_price.toFixed(2):'—'}</div></div>
+            <div class="kpi-card"><div class="kpi-label">Unrealized P&L</div><div class="kpi-value ${(m.unrealized_pnl||0)>=0?'green':'red'}">${m.unrealized_pnl!=null?fmt(m.unrealized_pnl):'—'}</div></div>
+        `;
+        // MTM table
+        const mps = (deal.market_prices||[]).sort((a,b)=>b.price_date.localeCompare(a.price_date));
+        document.getElementById('mtmTable').innerHTML = mps.map(p=>`
+            <tr><td>${p.price_date}</td><td>$${p.market_price_per_mt.toFixed(2)}</td><td>${p.source||''}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="deleteMTM(${p.id})">x</button></td></tr>
+        `).join('') || '<tr><td colspan="4" style="color:var(--text-dim);text-align:center;padding:12px">No MTM prices recorded</td></tr>';
+        // CF table
+        const cfs = (deal.cash_flows||[]).sort((a,b)=>a.flow_date.localeCompare(b.flow_date));
+        document.getElementById('cfTable').innerHTML = cfs.map(cf=>`
+            <tr><td>${cf.flow_date}</td><td>${cfLabel(cf.flow_type)}</td>
+            <td style="color:${cf.amount>=0?'var(--green)':'var(--red)'};font-weight:600">${fmt(cf.amount)}</td>
+            <td>${cf.description||''}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="deleteCF(${cf.id})">x</button></td></tr>
+        `).join('');
+    }
+
+    // ── Cash flow CRUD ──
+    async function addCashFlow() {
+        const body = {flow_type:document.getElementById('cfType').value, amount:parseFloat(document.getElementById('cfAmount').value), flow_date:document.getElementById('cfDate').value, description:document.getElementById('cfDesc').value||null};
+        if(!body.amount||!body.flow_date) return alert('Amount and Date required');
+        await apiFetch(`${API}/deals/${currentDealId}/cashflows`,{method:'POST',body:JSON.stringify(body)});
+        document.getElementById('cfAmount').value=''; document.getElementById('cfDesc').value='';
+        loadDealDetail(currentDealId);
+    }
+    async function deleteCF(id) { if(!confirm('Delete?'))return; await apiFetch(`${API}/cashflows/${id}`,{method:'DELETE'}); loadDealDetail(currentDealId); }
+
+    // ── MTM CRUD ──
+    async function addMTM() {
+        const body = {price_date:document.getElementById('mtmDate').value, market_price_per_mt:parseFloat(document.getElementById('mtmPrice').value), source:document.getElementById('mtmSource').value};
+        if(!body.market_price_per_mt||!body.price_date) return alert('Price and Date required');
+        await apiFetch(`${API}/deals/${currentDealId}/mtm`,{method:'POST',body:JSON.stringify(body)});
+        document.getElementById('mtmPrice').value='';
+        loadDealDetail(currentDealId);
+    }
+    async function deleteMTM(id) { if(!confirm('Delete?'))return; await apiFetch(`${API}/mtm/${id}`,{method:'DELETE'}); loadDealDetail(currentDealId); }
+
+    async function deleteDeal() { if(!confirm('Delete this deal and all data?'))return; await apiFetch(`${API}/deals/${currentDealId}`,{method:'DELETE'}); document.getElementById('detailTab').classList.add('hidden'); switchTab('deals'); }
+
+    // ── New Deal Modal ──
+    function openNewDealModal() {
+        document.getElementById('dealModal').classList.add('active');
+        document.getElementById('fTradeDate').value = new Date().toISOString().slice(0,10);
+        if(currentUser) document.getElementById('fTrader').value = currentUser.full_name;
+    }
+    function closeModal() { document.getElementById('dealModal').classList.remove('active'); }
+    async function submitDeal() {
+        const body = {
+            deal_ref: document.getElementById('fRef').value, commodity: document.getElementById('fCommodity').value,
+            trader: document.getElementById('fTrader').value, desk: document.getElementById('fDesk').value||null,
+            counterparty_buy: document.getElementById('fBuyFrom').value, counterparty_sell: document.getElementById('fSellTo').value,
+            quantity_mt: parseFloat(document.getElementById('fQty').value), buy_price_per_mt: parseFloat(document.getElementById('fBuyPrice').value),
+            sell_price_per_mt: parseFloat(document.getElementById('fSellPrice').value), total_capital_deployed: parseFloat(document.getElementById('fCapital').value),
+            leverage_amount: parseFloat(document.getElementById('fLeverage').value)||0, hurdle_rate_pct: parseFloat(document.getElementById('fHurdle').value)||15,
+            trade_date: document.getElementById('fTradeDate').value, expected_close_date: document.getElementById('fExpClose').value,
+            notes: document.getElementById('fNotes').value||null, cash_flows: [],
+        };
+        if(!body.deal_ref||!body.commodity||!body.trader||!body.counterparty_buy||!body.counterparty_sell||!body.quantity_mt||!body.buy_price_per_mt||!body.sell_price_per_mt||!body.total_capital_deployed||!body.trade_date||!body.expected_close_date) return alert('Fill all required fields (*)');
+        const r = await apiFetch(`${API}/deals`,{method:'POST',body:JSON.stringify(body)});
+        if(!r.ok){ const e=await r.json(); return alert(e.detail||'Error'); }
+        closeModal();
+        ['fRef','fBuyFrom','fSellTo','fQty','fBuyPrice','fSellPrice','fCapital','fNotes'].forEach(id=>document.getElementById(id).value='');
+        loadDeals();
+    }
+
+    // ── CSV Import/Export ──
+    function exportCSV() { window.location.href = `${API}/export/deals?status=${document.getElementById('filterStatus').value}`; }
+    function exportAudit() { window.location.href = `${API}/export/audit`; }
+    async function importCSV(input) {
+        if(!input.files[0]) return;
+        const form = new FormData();
+        form.append('file', input.files[0]);
+        const h = {}; if(authToken) h['Authorization']='Bearer '+authToken;
+        const r = await fetch(`${API}/import/deals`,{method:'POST',body:form,headers:h});
+        const data = await r.json();
+        let msg = `Imported ${data.created} deals.`;
+        if(data.errors&&data.errors.length) msg += `\n\nWarnings:\n${data.errors.join('\n')}`;
+        alert(msg);
+        input.value='';
+        loadDeals();
+    }
+
+    // ── Start ──
+    init();
     </script>
 </body>
 </html>

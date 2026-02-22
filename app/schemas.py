@@ -2,6 +2,36 @@ from pydantic import BaseModel, Field
 from datetime import date, datetime
 
 
+# ── Auth ──
+
+class UserCreate(BaseModel):
+    username: str = Field(..., min_length=2, max_length=50)
+    full_name: str
+    email: str | None = None
+    password: str = Field(..., min_length=4)
+    role: str = "trader"
+    desk: str | None = None
+
+
+class UserOut(BaseModel):
+    id: int
+    username: str
+    full_name: str
+    email: str | None
+    role: str
+    desk: str | None
+    is_active: bool
+    created_at: datetime | None
+
+    model_config = {"from_attributes": True}
+
+
+class TokenOut(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    user: UserOut
+
+
 # ── Cash Flow ──
 
 class CashFlowCreate(BaseModel):
@@ -18,6 +48,25 @@ class CashFlowOut(BaseModel):
     amount: float
     flow_date: date
     description: str | None
+
+    model_config = {"from_attributes": True}
+
+
+# ── Market Price (Mark-to-Market) ──
+
+class MarketPriceCreate(BaseModel):
+    price_date: date
+    market_price_per_mt: float
+    source: str | None = "manual"
+
+
+class MarketPriceOut(BaseModel):
+    id: int
+    deal_id: int
+    price_date: date
+    market_price_per_mt: float
+    source: str | None
+    created_at: datetime | None
 
     model_config = {"from_attributes": True}
 
@@ -82,9 +131,11 @@ class DealOut(BaseModel):
     actual_close_date: date | None
     hurdle_rate_pct: float
     notes: str | None
+    created_by: str | None
     created_at: datetime | None
     updated_at: datetime | None
     cash_flows: list[CashFlowOut] = []
+    market_prices: list[MarketPriceOut] = []
 
     model_config = {"from_attributes": True}
 
@@ -105,13 +156,21 @@ class DealMetrics(BaseModel):
     duration_days: int
     meets_hurdle: bool
     hurdle_rate_pct: float
+    # MTM fields
+    mtm_price: float | None = None
+    mtm_date: str | None = None
+    unrealized_pnl: float | None = None
+    mtm_roe_pct: float | None = None
 
 
 class PortfolioSummary(BaseModel):
     total_deals: int
+    open_deals: int
+    closed_deals: int
     total_capital_deployed: float
     capital_utilization_pct: float
     total_pnl: float
+    total_unrealized_pnl: float
     weighted_avg_roe_pct: float
     weighted_avg_annualized_pct: float
     deals_meeting_hurdle: int
@@ -125,5 +184,23 @@ class TraderSummary(BaseModel):
     deal_count: int
     total_capital_deployed: float
     total_pnl: float
+    total_unrealized_pnl: float
     weighted_avg_annualized_pct: float
     hurdle_pass_rate_pct: float
+
+
+# ── Audit ──
+
+class AuditLogOut(BaseModel):
+    id: int
+    timestamp: datetime | None
+    user: str
+    action: str
+    entity_type: str
+    entity_id: int | None
+    deal_ref: str | None
+    details: str | None
+    before_state: str | None
+    after_state: str | None
+
+    model_config = {"from_attributes": True}
