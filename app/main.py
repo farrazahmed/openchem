@@ -28,12 +28,17 @@ FIRM_CAPITAL = 200_000_000.0
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="OpenChem Deal Tracker", version="2.0.0")
+app = FastAPI(title="Montage Commodities", version="2.0.0")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 @app.get("/")
-def serve_frontend():
+def serve_website():
+    return FileResponse("static/website.html")
+
+
+@app.get("/app")
+def serve_deal_tracker():
     return FileResponse("static/index.html")
 
 
@@ -435,7 +440,7 @@ def export_deals_csv(status: str | None = None, db: Session = Depends(get_db)):
     return StreamingResponse(
         iter([output.getvalue()]),
         media_type="text/csv",
-        headers={"Content-Disposition": f"attachment; filename=openchem_deals_{date.today()}.csv"},
+        headers={"Content-Disposition": f"attachment; filename=montage_deals_{date.today()}.csv"},
     )
 
 
@@ -454,7 +459,7 @@ def export_audit_csv(db: Session = Depends(get_db)):
     return StreamingResponse(
         iter([output.getvalue()]),
         media_type="text/csv",
-        headers={"Content-Disposition": f"attachment; filename=openchem_audit_{date.today()}.csv"},
+        headers={"Content-Disposition": f"attachment; filename=montage_audit_{date.today()}.csv"},
     )
 
 

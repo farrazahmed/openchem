@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montage Commodities — Global Commodity Trading</title>
+    <meta name="description" content="Montage Commodities is a leading international commodity trading house specializing in fertilizers, steel, and sulphur across global markets.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════════
+           MONTAGE COMMODITIES — CORPORATE WEBSITE
+           ═══════════════════════════════════════════════════ */
+
+        :root {
+            --midnight: #0B1120;
+            --navy: #0F1B2D;
+            --slate: #162032;
+            --steel: #1E293B;
+            --border: #2A3A52;
+            --muted: #64748B;
+            --silver: #94A3B8;
+            --light: #CBD5E1;
+            --white: #F1F5F9;
+            --pure: #FFFFFF;
+            --gold: #D4A843;
+            --gold-light: #E8C668;
+            --gold-dark: #B8922E;
+            --accent: #2563EB;
+            --accent-light: #3B82F6;
+            --emerald: #10B981;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Playfair Display', Georgia, serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--midnight);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background: var(--gold); color: var(--midnight); }
+
+        /* ── UTILITY ── */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .section { padding: 120px 0; }
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 600;
+            color: var(--pure);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--silver);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideRight {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ═══════════════════════════════════════
+           NAVIGATION
+           ═══════════════════════════════════════ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        nav.scrolled {
+            background: rgba(11, 17, 32, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(212, 168, 67, 0.1);
+        }
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            position: relative;
+        }
+        .logo-icon svg { width: 100%; height: 100%; }
+        .logo-text {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--pure);
+            letter-spacing: -0.3px;
+        }
+        .logo-text span { color: var(--gold); }
+        .nav-links { display: flex; gap: 36px; align-items: center; }
+        .nav-links a {
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--silver);
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover { color: var(--pure); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            padding: 10px 24px !important;
+            background: transparent !important;
+            border: 1px solid var(--gold) !important;
+            color: var(--gold) !important;
+            border-radius: 4px;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+            letter-spacing: 1px !important;
+            text-transform: uppercase;
+            transition: all 0.3s !important;
+        }
+        .nav-cta::after { display: none !important; }
+        .nav-cta:hover {
+            background: var(--gold) !important;
+            color: var(--midnight) !important;
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .mobile-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--pure);
+            transition: all 0.3s;
+        }
+
+        /* ═══════════════════════════════════════
+           HERO
+           ═══════════════════════════════════════ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 50%, rgba(212, 168, 67, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 80% at 80% 30%, rgba(37, 99, 235, 0.05) 0%, transparent 60%),
+                radial-gradient(ellipse 100% 100% at 50% 100%, rgba(11, 17, 32, 1) 0%, transparent 50%);
+        }
+        /* Animated grid lines */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(212, 168, 67, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 168, 67, 0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+        }
+        /* Floating orbs */
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: float 8s ease-in-out infinite;
+        }
+        .hero-orb-1 {
+            width: 400px; height: 400px;
+            background: rgba(212, 168, 67, 0.08);
+            top: 10%; left: -5%;
+            animation-delay: 0s;
+        }
+        .hero-orb-2 {
+            width: 300px; height: 300px;
+            background: rgba(37, 99, 235, 0.06);
+            top: 60%; right: -5%;
+            animation-delay: -3s;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(212, 168, 67, 0.08);
+            border: 1px solid rgba(212, 168, 67, 0.2);
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+        }
+        .hero-badge-dot {
+            width: 6px; height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(42px, 6.5vw, 76px);
+            font-weight: 700;
+            line-height: 1.05;
+            color: var(--pure);
+            margin-bottom: 28px;
+            letter-spacing: -1px;
+        }
+        .hero h1 .gold {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 19px;
+            color: var(--silver);
+            max-width: 560px;
+            line-height: 1.75;
+            margin-bottom: 44px;
+        }
+        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--midnight);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(212, 168, 67, 0.25);
+        }
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: transparent;
+            color: var(--pure);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-ghost:hover {
+            border-color: var(--silver);
+            transform: translateY(-2px);
+        }
+
+        /* Hero stats bar */
+        .hero-stats {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            border-top: 1px solid rgba(212, 168, 67, 0.1);
+            background: rgba(11, 17, 32, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .hero-stats-inner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+        .hero-stat {
+            padding: 32px 24px;
+            text-align: center;
+            border-right: 1px solid rgba(212, 168, 67, 0.08);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        .hero-stat:last-child { border-right: none; }
+        .hero-stat:nth-child(1) { animation-delay: 0.6s; }
+        .hero-stat:nth-child(2) { animation-delay: 0.7s; }
+        .hero-stat:nth-child(3) { animation-delay: 0.8s; }
+        .hero-stat:nth-child(4) { animation-delay: 0.9s; }
+        .hero-stat-value {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--pure);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .hero-stat-value span { color: var(--gold); }
+        .hero-stat-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ═══════════════════════════════════════
+           ABOUT
+           ═══════════════════════════════════════ */
+        .about {
+            background: var(--navy);
+            position: relative;
+        }
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 168, 67, 0.2), transparent);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .about-content .section-subtitle { margin-bottom: 32px; }
+        .about-features { display: flex; flex-direction: column; gap: 20px; }
+        .about-feature {
+            display: flex; gap: 16px; align-items: flex-start;
+        }
+        .about-feature-icon {
+            width: 44px; height: 44px;
+            min-width: 44px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(212, 168, 67, 0.08);
+            border: 1px solid rgba(212, 168, 67, 0.15);
+            border-radius: 8px;
+        }
+        .about-feature-icon svg { width: 20px; height: 20px; color: var(--gold); }
+        .about-feature h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--pure);
+            margin-bottom: 4px;
+        }
+        .about-feature p { font-size: 14px; color: var(--silver); line-height: 1.6; }
+
+        .about-visual {
+            position: relative;
+            height: 480px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--slate);
+            border: 1px solid var(--border);
+        }
+        .about-map {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .about-map svg { width: 100%; height: auto; opacity: 0.3; }
+        .about-route-dots {
+            position: absolute;
+            inset: 0;
+        }
+        .route-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(212, 168, 67, 0.4);
+        }
+        .route-dot::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 1px solid rgba(212, 168, 67, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .route-dot-label {
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--gold);
+            white-space: nowrap;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Stat cards over the map */
+        .about-overlay-stats {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            right: 24px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .about-overlay-stat {
+            background: rgba(11, 17, 32, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 168, 67, 0.12);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        .about-overlay-stat-value {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .about-overlay-stat-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* ═══════════════════════════════════════
+           COMMODITIES
+           ═══════════════════════════════════════ */
+        .commodities { position: relative; }
+        .commodities-header { text-align: center; margin-bottom: 64px; }
+        .commodities-header .section-subtitle { margin: 0 auto; }
+        .commodities-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .commodity-card {
+            background: var(--navy);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px 32px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .commodity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .commodity-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 168, 67, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .commodity-card:hover::before { opacity: 1; }
+        .commodity-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212, 168, 67, 0.06);
+            border: 1px solid rgba(212, 168, 67, 0.12);
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .commodity-icon svg { width: 28px; height: 28px; color: var(--gold); }
+        .commodity-card h3 {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--pure);
+            margin-bottom: 12px;
+        }
+        .commodity-card p {
+            font-size: 14px;
+            color: var(--silver);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        .commodity-products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .commodity-tag {
+            padding: 5px 12px;
+            background: rgba(212, 168, 67, 0.06);
+            border: 1px solid rgba(212, 168, 67, 0.12);
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 0.5px;
+        }
+        .commodity-routes {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+        .commodity-routes-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .commodity-route-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--silver);
+            margin-bottom: 6px;
+        }
+        .commodity-route-arrow { color: var(--gold); font-size: 10px; }
+
+        /* ═══════════════════════════════════════
+           WHY MONTAGE
+           ═══════════════════════════════════════ */
+        .why {
+            background: var(--navy);
+            position: relative;
+        }
+        .why::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 168, 67, 0.2), transparent);
+        }
+        .why-header { margin-bottom: 64px; }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .why-card {
+            background: var(--slate);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 36px;
+            transition: all 0.3s;
+        }
+        .why-card:hover {
+            border-color: rgba(212, 168, 67, 0.15);
+        }
+        .why-card-number {
+            font-family: var(--font-serif);
+            font-size: 40px;
+            font-weight: 700;
+            color: rgba(212, 168, 67, 0.15);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        .why-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--pure);
+            margin-bottom: 10px;
+        }
+        .why-card p {
+            font-size: 14px;
+            color: var(--silver);
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════════════════
+           GLOBAL REACH — TICKER
+           ═══════════════════════════════════════ */
+        .ticker-section {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            background: var(--midnight);
+        }
+        .ticker-track {
+            display: flex;
+            animation: ticker 30s linear infinite;
+            width: max-content;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 48px;
+            white-space: nowrap;
+        }
+        .ticker-item span {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--silver);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .ticker-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        /* ═══════════════════════════════════════
+           CONTACT
+           ═══════════════════════════════════════ */
+        .contact { position: relative; }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+        .contact-info { padding-top: 8px; }
+        .contact-info .section-subtitle { margin-bottom: 40px; }
+        .contact-detail {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .contact-detail-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212, 168, 67, 0.06);
+            border: 1px solid rgba(212, 168, 67, 0.12);
+            border-radius: 8px;
+        }
+        .contact-detail-icon svg { width: 18px; height: 18px; color: var(--gold); }
+        .contact-detail h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--pure);
+            margin-bottom: 2px;
+        }
+        .contact-detail p {
+            font-size: 13px;
+            color: var(--silver);
+            line-height: 1.6;
+        }
+        .contact-detail a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        .contact-detail a:hover { text-decoration: underline; }
+
+        .contact-form {
+            background: var(--navy);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px;
+        }
+        .contact-form h3 {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--pure);
+            margin-bottom: 24px;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+        .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--silver);
+            letter-spacing: 0.5px;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 12px 16px;
+            background: var(--slate);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--pure);
+            font-family: var(--font-sans);
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-submit {
+            width: 100%;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--midnight);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .form-submit:hover {
+            box-shadow: 0 8px 30px rgba(212, 168, 67, 0.25);
+            transform: translateY(-1px);
+        }
+
+        /* ═══════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════ */
+        footer {
+            background: var(--navy);
+            border-top: 1px solid var(--border);
+            padding: 60px 0 32px;
+        }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        .footer-brand p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.7;
+            margin-top: 16px;
+            max-width: 300px;
+        }
+        .footer-col h4 {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--silver);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .footer-col a {
+            display: block;
+            font-size: 13px;
+            color: var(--muted);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+        .footer-bottom p {
+            font-size: 12px;
+            color: var(--muted);
+        }
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+        .footer-bottom-links a {
+            font-size: 12px;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-bottom-links a:hover { color: var(--silver); }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .commodities-grid { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
+            .about-grid { grid-template-columns: 1fr; gap: 48px; }
+            .about-visual { height: 360px; }
+            .why-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+        @media (max-width: 768px) {
+            .section { padding: 80px 0; }
+            .nav-links { display: none; }
+            .mobile-toggle { display: flex; }
+            .hero-stats-inner { grid-template-columns: repeat(2, 1fr); }
+            .hero-stat { padding: 20px 16px; }
+            .hero-stat-value { font-size: 28px; }
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 16px; }
+            .hero-actions { flex-direction: column; }
+            .btn-gold, .btn-ghost { text-align: center; justify-content: center; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-top { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+
+            /* Mobile nav */
+            .nav-links.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(11, 17, 32, 0.98);
+                backdrop-filter: blur(20px);
+                padding: 24px;
+                gap: 20px;
+                border-bottom: 1px solid var(--border);
+            }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+            .hero-stats-inner { grid-template-columns: 1fr 1fr; }
+            .about-overlay-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════════
+         NAVIGATION
+         ═══════════════════════════════════════ -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1" y="1" width="40" height="40" rx="6" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+                            <path d="M11 28V14l5 10 5-10v14" stroke="#D4A843" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <path d="M27 14h5v14h-5" stroke="#D4A843" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <line x1="27" y1="21" x2="32" y2="21" stroke="#D4A843" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">Montage <span>Commodities</span></div>
+                </a>
+                <div class="nav-links" id="navLinks">
+                    <a href="#about">About</a>
+                    <a href="#commodities">Commodities</a>
+                    <a href="#why">Why Us</a>
+                    <a href="#contact">Contact</a>
+                    <a href="/app" class="nav-cta">Deal Tracker</a>
+                </div>
+                <div class="mobile-toggle" id="mobileToggle" onclick="toggleMobile()">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════
+         HERO
+         ═══════════════════════════════════════ -->
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="hero-grid"></div>
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <div class="hero-badge-dot"></div>
+                    International Commodity Trading
+                </div>
+                <h1>Moving the World's<br><span class="gold">Essential Resources</span></h1>
+                <p>Montage Commodities connects producers to end-users across global supply chains — trading fertilizers, steel, and sulphur with precision, integrity, and deep market expertise.</p>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn-gold">
+                        Get in Touch
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#commodities" class="btn-ghost">
+                        Our Commodities
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="container">
+                <div class="hero-stats-inner">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">$200<span>M+</span></div>
+                        <div class="hero-stat-label">Capital Base</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">15<span>+</span></div>
+                        <div class="hero-stat-label">Countries Served</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">500<span>K</span></div>
+                        <div class="hero-stat-label">MT Traded Annually</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">3</div>
+                        <div class="hero-stat-label">Trading Desks</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         TICKER
+         ═══════════════════════════════════════ -->
+    <div class="ticker-section">
+        <div class="ticker-track" id="ticker">
+            <div class="ticker-item"><div class="ticker-dot"></div><span>Saudi Arabia</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>India</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>Turkey</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>UAE</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>China</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>Brazil</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>Vietnam</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>Bangladesh</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>East Africa</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>South Korea</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>Qatar</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>Kazakhstan</span></div>
+            <!-- Duplicate for seamless loop -->
+            <div class="ticker-item"><div class="ticker-dot"></div><span>Saudi Arabia</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>India</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>Turkey</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>UAE</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>China</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>Brazil</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>Vietnam</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>Bangladesh</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>East Africa</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>South Korea</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>Qatar</span></div>
+            <div class="ticker-item"><div class="ticker-dot"></div><span>Kazakhstan</span></div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         ABOUT
+         ═══════════════════════════════════════ -->
+    <section class="about section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content reveal">
+                    <div class="section-label">About Us</div>
+                    <div class="section-title">Built on Trust,<br>Driven by Markets</div>
+                    <div class="section-subtitle">
+                        Montage Commodities is an international commodity trading house headquartered in the UAE. We specialise in the physical trading of fertilizers, steel, and sulphur — connecting major producers across the Middle East, Central Asia, and beyond with consumers worldwide.
+                    </div>
+                    <div class="about-features" style="margin-top: 36px;">
+                        <div class="about-feature reveal reveal-delay-1">
+                            <div class="about-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            </div>
+                            <div>
+                                <h4>Global Footprint</h4>
+                                <p>Active trading corridors spanning the Middle East, South Asia, East Asia, South America, and Africa.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature reveal reveal-delay-2">
+                            <div class="about-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <div>
+                                <h4>Risk-Managed</h4>
+                                <p>Rigorous deal structuring with hedging, mark-to-market valuation, and full audit trail on every transaction.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature reveal reveal-delay-3">
+                            <div class="about-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                            </div>
+                            <div>
+                                <h4>Performance-Driven</h4>
+                                <p>Capital-efficient execution with hurdle-rate discipline and annualized return benchmarking across all desks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual reveal reveal-delay-2">
+                    <!-- Stylized trade route map -->
+                    <div class="about-map">
+                        <svg viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Simplified world map outline -->
+                            <path d="M50 120 C60 100, 80 90, 100 95 C120 100, 130 80, 150 85 C170 90, 180 75, 200 80 C210 85, 220 78, 230 82 L240 85 C250 90, 260 95, 270 88 C280 82, 300 90, 310 95 C320 100, 340 88, 360 92 C380 96, 400 85, 420 90 C440 95, 460 100, 470 105" stroke="rgba(212,168,67,0.15)" stroke-width="1" fill="none"/>
+                            <path d="M80 140 C100 135, 120 145, 140 140 C160 135, 180 150, 200 145 C220 140, 240 155, 260 148 C280 142, 300 150, 320 145 C340 140, 360 155, 380 148" stroke="rgba(212,168,67,0.1)" stroke-width="1" fill="none"/>
+                            <!-- Trade route arcs -->
+                            <path d="M200 130 Q280 80 360 140" stroke="rgba(212,168,67,0.25)" stroke-width="1.5" fill="none" stroke-dasharray="6 4"/>
+                            <path d="M200 130 Q300 60 400 120" stroke="rgba(37,99,235,0.2)" stroke-width="1" fill="none" stroke-dasharray="4 4"/>
+                            <path d="M200 130 Q150 180 120 200" stroke="rgba(16,185,129,0.2)" stroke-width="1" fill="none" stroke-dasharray="4 4"/>
+                            <path d="M200 130 Q250 170 330 180" stroke="rgba(212,168,67,0.2)" stroke-width="1" fill="none" stroke-dasharray="4 4"/>
+                        </svg>
+                    </div>
+                    <div class="about-route-dots">
+                        <!-- UAE (hub) -->
+                        <div class="route-dot" style="top: 40%; left: 40%;">
+                            <div class="route-dot-label">UAE Hub</div>
+                        </div>
+                        <!-- Saudi Arabia -->
+                        <div class="route-dot" style="top: 38%; left: 32%; width: 7px; height: 7px; opacity: 0.7;"></div>
+                        <!-- India -->
+                        <div class="route-dot" style="top: 48%; left: 58%; width: 7px; height: 7px; opacity: 0.7;"></div>
+                        <!-- Turkey -->
+                        <div class="route-dot" style="top: 28%; left: 34%; width: 7px; height: 7px; opacity: 0.7;"></div>
+                        <!-- East Asia -->
+                        <div class="route-dot" style="top: 35%; left: 72%; width: 7px; height: 7px; opacity: 0.7;"></div>
+                        <!-- Brazil -->
+                        <div class="route-dot" style="top: 62%; left: 15%; width: 7px; height: 7px; opacity: 0.7;"></div>
+                    </div>
+                    <div class="about-overlay-stats">
+                        <div class="about-overlay-stat">
+                            <div class="about-overlay-stat-value">3</div>
+                            <div class="about-overlay-stat-label">Trading Desks</div>
+                        </div>
+                        <div class="about-overlay-stat">
+                            <div class="about-overlay-stat-value">15+</div>
+                            <div class="about-overlay-stat-label">Origins & Destinations</div>
+                        </div>
+                        <div class="about-overlay-stat">
+                            <div class="about-overlay-stat-value">24/5</div>
+                            <div class="about-overlay-stat-label">Market Coverage</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         COMMODITIES
+         ═══════════════════════════════════════ -->
+    <section class="commodities section" id="commodities">
+        <div class="container">
+            <div class="commodities-header reveal">
+                <div class="section-label">What We Trade</div>
+                <div class="section-title">Core Commodity Verticals</div>
+                <div class="section-subtitle">Three focused desks with deep domain expertise in their respective markets, enabling superior price discovery and execution.</div>
+            </div>
+            <div class="commodities-grid">
+                <!-- Fertilizers -->
+                <div class="commodity-card reveal reveal-delay-1">
+                    <div class="commodity-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22c4-4 8-7.5 8-12a8 8 0 0 0-16 0c0 4.5 4 8 8 12z"/>
+                            <path d="M12 2v10M8 6c2 2 4 2 4 2s2 0 4-2"/>
+                        </svg>
+                    </div>
+                    <h3>Fertilizers</h3>
+                    <p>We trade granular and prilled urea from the world's leading producers in the Middle East and Central Asia, supplying agricultural markets across South Asia, Southeast Asia, Brazil, and East Africa.</p>
+                    <div class="commodity-products">
+                        <div class="commodity-tag">Urea (Granular)</div>
+                        <div class="commodity-tag">Urea (Prilled)</div>
+                    </div>
+                    <div class="commodity-routes">
+                        <div class="commodity-routes-title">Key Trade Routes</div>
+                        <div class="commodity-route-item">
+                            <span class="commodity-route-arrow">&rarr;</span>
+                            Saudi Arabia / Qatar to India
+                        </div>
+                        <div class="commodity-route-item">
+                            <span class="commodity-route-arrow">&rarr;</span>
+                            Middle East to Brazil & East Africa
+                        </div>
+                        <div class="commodity-route-item">
+                            <span class="commodity-route-arrow">&rarr;</span>
+                            Central Asia to Southeast Asia
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Steel -->
+                <div class="commodity-card reveal reveal-delay-2">
+                    <div class="commodity-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="8" width="18" height="8" rx="1"/>
+                            <path d="M3 12h18M7 8V6M12 8V4M17 8V6"/>
+                        </svg>
+                    </div>
+                    <h3>Steel</h3>
+                    <p>Our steel desk trades HRC, rebar, and billets — sourcing from major mills in Turkey, CIS, and East Asia, and delivering to construction and manufacturing markets across the Middle East, South Asia, and Africa.</p>
+                    <div class="commodity-products">
+                        <div class="commodity-tag">HRC (Hot Rolled Coil)</div>
+                        <div class="commodity-tag">Rebar</div>
+                        <div class="commodity-tag">Billet</div>
+                    </div>
+                    <div class="commodity-routes">
+                        <div class="commodity-routes-title">Key Trade Routes</div>
+                        <div class="commodity-route-item">
+                            <span class="commodity-route-arrow">&rarr;</span>
+                            Turkey to UAE & Saudi Arabia
+                        </div>
+                        <div class="commodity-route-item">
+                            <span class="commodity-route-arrow">&rarr;</span>
+                            CIS to Middle East & India
+                        </div>
+                        <div class="commodity-route-item">
+                            <span class="commodity-route-arrow">&rarr;</span>
+                            East Asia to Southeast Asia
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sulphur -->
+                <div class="commodity-card reveal reveal-delay-3">
+                    <div class="commodity-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                        </svg>
+                    </div>
+                    <h3>Sulphur</h3>
+                    <p>Trading both granular and lump sulphur from major oil-and-gas-derived supply sources in the Gulf. Sulphur is a critical input for phosphate fertilizer production and industrial chemical processes.</p>
+                    <div class="commodity-products">
+                        <div class="commodity-tag">Sulphur (Granular)</div>
+                        <div class="commodity-tag">Sulphur (Lump)</div>
+                    </div>
+                    <div class="commodity-routes">
+                        <div class="commodity-routes-title">Key Trade Routes</div>
+                        <div class="commodity-route-item">
+                            <span class="commodity-route-arrow">&rarr;</span>
+                            UAE / Saudi Arabia to India
+                        </div>
+                        <div class="commodity-route-item">
+                            <span class="commodity-route-arrow">&rarr;</span>
+                            Kazakhstan to China & South Asia
+                        </div>
+                        <div class="commodity-route-item">
+                            <span class="commodity-route-arrow">&rarr;</span>
+                            Gulf to North & East Africa
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         WHY MONTAGE
+         ═══════════════════════════════════════ -->
+    <section class="why section" id="why">
+        <div class="container">
+            <div class="why-header reveal">
+                <div class="section-label">Why Montage</div>
+                <div class="section-title">The Montage Advantage</div>
+                <div class="section-subtitle">We combine deep commodity expertise with disciplined capital deployment and institutional-grade risk management.</div>
+            </div>
+            <div class="why-grid">
+                <div class="why-card reveal reveal-delay-1">
+                    <div class="why-card-number">01</div>
+                    <h3>Deep Market Access</h3>
+                    <p>Decades of combined experience and established relationships with tier-one producers, refiners, and mills across the Middle East, CIS, and Asia — giving us priority allocation and preferential terms.</p>
+                </div>
+                <div class="why-card reveal reveal-delay-2">
+                    <div class="why-card-number">02</div>
+                    <h3>Disciplined Capital Deployment</h3>
+                    <p>Every deal is measured against a hurdle rate with full P&L attribution, IRR benchmarking, and annualized return tracking. Capital goes where risk-adjusted returns are strongest.</p>
+                </div>
+                <div class="why-card reveal reveal-delay-3">
+                    <div class="why-card-number">03</div>
+                    <h3>End-to-End Execution</h3>
+                    <p>From LC issuance and freight chartering to SGS inspection and customs clearance — we manage every link of the supply chain so counterparties receive seamless, reliable service.</p>
+                </div>
+                <div class="why-card reveal reveal-delay-4">
+                    <div class="why-card-number">04</div>
+                    <h3>Transparent Governance</h3>
+                    <p>Full audit trail on every transaction, real-time mark-to-market valuations, and role-based access controls. Our platform delivers the transparency that institutional partners expect.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         CONTACT
+         ═══════════════════════════════════════ -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <div class="section-label">Contact Us</div>
+                    <div class="section-title">Let's Talk Business</div>
+                    <div class="section-subtitle">Whether you're a producer looking for market access or a buyer seeking reliable supply, we'd like to hear from you.</div>
+
+                    <div class="contact-detail" style="margin-top: 40px;">
+                        <div class="contact-detail-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div>
+                            <h4>Head Office</h4>
+                            <p>Dubai, United Arab Emirates</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:info@montagecommodities.com">info@montagecommodities.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p><a href="tel:+97142345678">+971 4 234 5678</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form reveal reveal-delay-2">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactForm" onsubmit="handleContactForm(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Company</label>
+                                <input type="text" placeholder="Company name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Inquiry Type</label>
+                            <select required>
+                                <option value="">Select...</option>
+                                <option>Fertilizer Trading</option>
+                                <option>Steel Trading</option>
+                                <option>Sulphur Trading</option>
+                                <option>Partnership Opportunity</option>
+                                <option>General Inquiry</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea placeholder="Tell us about your requirements..." required></textarea>
+                        </div>
+                        <button type="submit" class="form-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         FOOTER
+         ═══════════════════════════════════════ -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="1" y="1" width="40" height="40" rx="6" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+                                <path d="M11 28V14l5 10 5-10v14" stroke="#D4A843" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <path d="M27 14h5v14h-5" stroke="#D4A843" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <line x1="27" y1="21" x2="32" y2="21" stroke="#D4A843" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <div class="logo-text">Montage <span>Commodities</span></div>
+                    </a>
+                    <p>Connecting global commodity supply chains with trust, precision, and deep market expertise.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="#about">About Us</a>
+                    <a href="#commodities">Commodities</a>
+                    <a href="#why">Why Montage</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Trading Desks</h4>
+                    <a href="#commodities">Fertilizers</a>
+                    <a href="#commodities">Steel</a>
+                    <a href="#commodities">Sulphur</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="/app">Deal Tracker</a>
+                    <a href="/app">Analytics</a>
+                    <a href="/app">Audit Trail</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Montage Commodities. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Compliance</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════
+         SCRIPTS
+         ═══════════════════════════════════════ -->
+    <script>
+    // ── Scroll-based nav styling ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Mobile nav toggle ──
+    function toggleMobile() {
+        document.getElementById('navLinks').classList.toggle('mobile-open');
+    }
+    // Close mobile nav on link click
+    document.querySelectorAll('.nav-links a').forEach(a => {
+        a.addEventListener('click', () => {
+            document.getElementById('navLinks').classList.remove('mobile-open');
+        });
+    });
+
+    // ── Intersection Observer for scroll reveals ──
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── Smooth scroll for anchor links ──
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const offset = 80;
+                const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // ── Contact form handler ──
+    function handleContactForm(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('.form-submit');
+        btn.textContent = 'Message Sent!';
+        btn.style.background = '#10B981';
+        setTimeout(() => {
+            btn.textContent = 'Send Message';
+            btn.style.background = '';
+            e.target.reset();
+        }, 3000);
+    }
+
+    // ── Counter animation for hero stats ──
+    function animateCounters() {
+        document.querySelectorAll('.hero-stat-value').forEach(el => {
+            const text = el.textContent;
+            const match = text.match(/^(\d+)/);
+            if (!match) return;
+            const target = parseInt(match[1]);
+            const suffix = text.replace(match[1], '');
+            let current = 0;
+            const increment = target / 40;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                el.innerHTML = Math.floor(current) + suffix;
+            }, 30);
+        });
+    }
+    // Run once on load
+    setTimeout(animateCounters, 800);
+    </script>
+</body>
+</html>
