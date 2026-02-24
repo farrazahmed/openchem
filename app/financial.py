@@ -8,8 +8,6 @@ Metrics computed per deal:
 - MTM: Mark-to-market unrealized P&L on open positions
 """
 
-import numpy as np
-from scipy.optimize import brentq
 from datetime import date
 
 
@@ -74,18 +72,30 @@ def _compute_xirr(
         return None
 
     day_fractions = [(cf[0] - base_date).days / 365.0 for cf in cash_flows]
-    amounts_arr = np.array([cf[1] for cf in cash_flows])
-    fractions_arr = np.array(day_fractions)
+    amounts = [cf[1] for cf in cash_flows]
 
     def npv_at_rate(r):
         if r <= -1:
             return float("inf")
-        return np.sum(amounts_arr / (1.0 + r) ** fractions_arr)
+        return sum(a / (1.0 + r) ** f for a, f in zip(amounts, day_fractions))
 
+    # Brent's method (root-finding) — pure Python replacement for scipy.optimize.brentq
     try:
-        irr = brentq(npv_at_rate, -0.99, 10.0, maxiter=1000)
-        return irr * 100
-    except (ValueError, RuntimeError):
+        a, b = -0.99, 10.0
+        fa, fb = npv_at_rate(a), npv_at_rate(b)
+        if fa * fb > 0:
+            return None
+        for _ in range(1000):
+            mid = (a + b) / 2.0
+            fmid = npv_at_rate(mid)
+            if abs(fmid) < 1e-12 or (b - a) / 2.0 < 1e-12:
+                return mid * 100
+            if fa * fmid < 0:
+                b, fb = mid, fmid
+            else:
+                a, fa = mid, fmid
+        return mid * 100
+    except (ValueError, RuntimeError, ZeroDivisionError):
         return None
 
 
